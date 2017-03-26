@@ -5,7 +5,7 @@ use Phalcon\Paginator\Adapter\Model as Paginator;
 
 class CategoriesController extends ControllerBase
 {
-	private $category = null;
+    private $category = null;
 
     public function initialize()
     {
@@ -17,30 +17,30 @@ class CategoriesController extends ControllerBase
     }
 
     /**
-    * The start action, it shows the "search" view
-    */
+     * The start action, it shows the "search" view
+     */
     public function indexAction()
     {
         $this->view->form = new CategoriesForm();
     }
 
-	/**
-    * Returning a paginator for all recoreds in this model
-    */
+    /**
+     * Returning a paginator for all recoreds in this model
+     */
     public function showAction()
     {
-        $this->view->show_categories_active  = 'active';
+        $this->view->show_categories_active = 'active';
         $numberPage = $this->request->getQuery("page", "int", 1);
         $categories = Categories::find();
         $paginator = new Paginator(array(
-                        "data"  => $categories,
-                        "limit" => 10,
-                        "page"  => $numberPage)
-                     );
+                "data"  => $categories,
+                "limit" => 10,
+                "page"  => $numberPage)
+        );
         $this->view->page = $paginator->getPaginate();
     }
 
-	/**
+    /**
      * Shows the view to create a "new" product
      */
     public function newAction()
@@ -50,12 +50,12 @@ class CategoriesController extends ControllerBase
         $this->view->form = new CategoriesForm($category, 'create');
     }
 
-	/**
+    /**
      * Shows the view to "edit" an existing product
      */
     public function editAction($id)
     {
-        if(!$this->request->isPost()) {
+        if (!$this->request->isPost()) {
             $category = Categories::findFirstById($id);
             if (!$category) {
                 $this->flash->error("Category was not found");
@@ -67,7 +67,7 @@ class CategoriesController extends ControllerBase
         }
     }
 
-	/**
+    /**
      * Creates a product based on the data entered in the "new" action
      */
     public function createAction()
@@ -98,9 +98,9 @@ class CategoriesController extends ControllerBase
     }
 
     /**
-    * Updates a product based on the data entered in the "edit" action
-    */
-	public function saveAction()
+     * Updates a product based on the data entered in the "edit" action
+     */
+    public function saveAction()
     {
         if (!$this->request->isPost()) {
             return $this->forward("categories/index");
@@ -131,7 +131,7 @@ class CategoriesController extends ControllerBase
         return $this->forward("categories/show");
     }
 
-	/**
+    /**
      * Deletes an existing product
      */
     public function deleteAction($id)

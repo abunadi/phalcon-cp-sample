@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Phalcon\Db\Column;
 use Phalcon\Db\Index;
@@ -22,45 +22,45 @@ class CpUsersMigration_100 extends Migration
                     new Column(
                         'id',
                         array(
-                            'type' => Column::TYPE_INTEGER,
-                            'unsigned' => true,
-                            'notNull' => true,
+                            'type'          => Column::TYPE_INTEGER,
+                            'unsigned'      => true,
+                            'notNull'       => true,
                             'autoIncrement' => true,
-                            'size' => 2,
-                            'first' => true
+                            'size'          => 2,
+                            'first'         => true
                         )
                     ),
                     new Column(
                         'username',
                         array(
-                            'type' => Column::TYPE_VARCHAR,
+                            'type'    => Column::TYPE_VARCHAR,
                             'notNull' => true,
-                            'size' => 30,
-                            'after' => 'id'
+                            'size'    => 30,
+                            'after'   => 'id'
                         )
                     ),
                     new Column(
                         'password',
                         array(
-                            'type' => Column::TYPE_VARCHAR,
+                            'type'    => Column::TYPE_VARCHAR,
                             'notNull' => true,
-                            'size' => 32,
-                            'after' => 'username'
+                            'size'    => 32,
+                            'after'   => 'username'
                         )
                     ),
                     new Column(
                         'email',
                         array(
-                            'type' => Column::TYPE_VARCHAR,
-                            'size' => 50,
+                            'type'  => Column::TYPE_VARCHAR,
+                            'size'  => 50,
                             'after' => 'password'
                         )
                     ),
                     new Column(
                         'last_activity',
                         array(
-                            'type' => Column::TYPE_DATETIME,
-                            'size' => 1,
+                            'type'  => Column::TYPE_DATETIME,
+                            'size'  => 1,
                             'after' => 'email'
                         )
                     )
@@ -69,9 +69,9 @@ class CpUsersMigration_100 extends Migration
                     new Index('PRIMARY', array('id'))
                 ),
                 'options' => array(
-                    'TABLE_TYPE' => 'BASE TABLE',
-                    'AUTO_INCREMENT' => '5',
-                    'ENGINE' => 'InnoDB',
+                    'TABLE_TYPE'      => 'BASE TABLE',
+                    'AUTO_INCREMENT'  => '5',
+                    'ENGINE'          => 'InnoDB',
                     'TABLE_COLLATION' => 'utf8_unicode_ci'
                 ),
             )

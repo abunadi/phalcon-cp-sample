@@ -4,19 +4,20 @@ use Phalcon\Mvc\Model;
 use Phalcon\Mvc\Model\Relation;
 use Phalcon\Mvc\Model\Message as Message;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
+
 /**
  * Categories
  */
 class Categories extends Model
 {
-	protected $id;
-	protected $parent_id;
-	protected $name;
-	protected $description;
+    protected $id;
+    protected $parent_id;
+    protected $name;
+    protected $description;
 
-	/**
-    * Parents initializer
-    */
+    /**
+     * Parents initializer
+     */
     public function initialize()
     {
         $this->belongsTo('parent_id', 'Categories', 'id');
@@ -25,20 +26,19 @@ class Categories extends Model
         );
     }
 
-	public function getData()
+    public function getData()
     {
-        return array('id' => $this->getID(),
-                     'parent_id' => $this->getParentID(),
-                     'name' => $this->getName(),
+        return array('id'          => $this->getID(),
+                     'parent_id'   => $this->getParentID(),
+                     'name'        => $this->getName(),
                      'description' => $this->getDescription());
     }
 
-	public function setID($id)
+    public function setID($id)
     {
         if (!is_numeric($id)) {
             $this->appendMessage(new Message('ID is invalid.', 'id', 'InvalidValue'));
-        }
-        else {
+        } else {
             $this->id = $id;
         }
     }
@@ -48,7 +48,8 @@ class Categories extends Model
         return $this->id;
     }
 
-	public function setParentID($id) {
+    public function setParentID($id)
+    {
         if (!empty($id) && is_numeric($id)) {
             $this->parent_id = $id;
         }
@@ -63,8 +64,7 @@ class Categories extends Model
     {
         if (empty($name)) {
             $this->appendMessage(new Message('Name is required.', 'name', 'InvalidValue'));
-        }
-        else {
+        } else {
             $this->name = $name;
         }
     }
@@ -78,8 +78,7 @@ class Categories extends Model
     {
         if (empty($description)) {
             $this->appendMessage(new Message('Description is required.', 'description', 'InvalidValue'));
-        }
-        else {
+        } else {
             $this->description = $description;
         }
     }
@@ -89,7 +88,7 @@ class Categories extends Model
         return $this->description;
     }
 
-	public function isValid()
+    public function isValid()
     {
         return (count($this->getMessages()) > 0 ? false : true);
     }
@@ -97,13 +96,13 @@ class Categories extends Model
 
     public function beforeSave()
     {
-      /*  $this->validate(
-            new Uniqueness(
-                array("field"   => array('parent_id', 'name'),
-                      "message" => "This Category has been added before."
-                )
-            )
-        );
-        return ($this->validationHasFailed() == true ? false : true);*/
+        /*  $this->validate(
+              new Uniqueness(
+                  array("field"   => array('parent_id', 'name'),
+                        "message" => "This Category has been added before."
+                  )
+              )
+          );
+          return ($this->validationHasFailed() == true ? false : true);*/
     }
 }

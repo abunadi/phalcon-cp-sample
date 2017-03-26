@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Phalcon\Db\Column;
 use Phalcon\Db\Index;
@@ -18,40 +18,40 @@ class ItemsCategoriesMigration_100 extends Migration
     public function morph()
     {
         $this->morphTable('items_categories', array(
-                'columns' => array(
+                'columns'    => array(
                     new Column(
                         'id',
                         array(
-                            'type' => Column::TYPE_INTEGER,
-                            'unsigned' => true,
-                            'notNull' => true,
+                            'type'          => Column::TYPE_INTEGER,
+                            'unsigned'      => true,
+                            'notNull'       => true,
                             'autoIncrement' => true,
-                            'size' => 10,
-                            'first' => true
+                            'size'          => 10,
+                            'first'         => true
                         )
                     ),
                     new Column(
                         'sid',
                         array(
-                            'type' => Column::TYPE_INTEGER,
+                            'type'     => Column::TYPE_INTEGER,
                             'unsigned' => true,
-                            'notNull' => true,
-                            'size' => 10,
-                            'after' => 'id'
+                            'notNull'  => true,
+                            'size'     => 10,
+                            'after'    => 'id'
                         )
                     ),
                     new Column(
                         'cid',
                         array(
-                            'type' => Column::TYPE_INTEGER,
+                            'type'     => Column::TYPE_INTEGER,
                             'unsigned' => true,
-                            'notNull' => true,
-                            'size' => 10,
-                            'after' => 'sid'
+                            'notNull'  => true,
+                            'size'     => 10,
+                            'after'    => 'sid'
                         )
                     )
                 ),
-                'indexes' => array(
+                'indexes'    => array(
                     new Index('PRIMARY', array('id')),
                     new Index('sid', array('sid')),
                     new Index('cid', array('cid'))
@@ -60,26 +60,26 @@ class ItemsCategoriesMigration_100 extends Migration
                     new Reference(
                         'items_categories_ibfk_1',
                         array(
-                            'referencedSchema' => 'malls_navi',
-                            'referencedTable' => 'items',
-                            'columns' => array('sid'),
+                            'referencedSchema'  => 'malls_navi',
+                            'referencedTable'   => 'items',
+                            'columns'           => array('sid'),
                             'referencedColumns' => array('id')
                         )
                     ),
                     new Reference(
                         'items_categories_ibfk_2',
                         array(
-                            'referencedSchema' => 'malls_navi',
-                            'referencedTable' => 'categories',
-                            'columns' => array('cid'),
+                            'referencedSchema'  => 'malls_navi',
+                            'referencedTable'   => 'categories',
+                            'columns'           => array('cid'),
                             'referencedColumns' => array('id')
                         )
                     )
                 ),
-                'options' => array(
-                    'TABLE_TYPE' => 'BASE TABLE',
-                    'AUTO_INCREMENT' => '684',
-                    'ENGINE' => 'InnoDB',
+                'options'    => array(
+                    'TABLE_TYPE'      => 'BASE TABLE',
+                    'AUTO_INCREMENT'  => '684',
+                    'ENGINE'          => 'InnoDB',
                     'TABLE_COLLATION' => 'utf8_unicode_ci'
                 ),
             )

@@ -1,4 +1,5 @@
 <?php
+
 class ErrorsController extends ControllerBase
 {
     public function initialize()
@@ -9,16 +10,16 @@ class ErrorsController extends ControllerBase
 
     public function show404Action()
     {
-	    $this->flash->error("Oops! Page not found.");
+        $this->flash->error("Oops! Page not found.");
     }
 
     public function show401Action()
     {
-	    $this->flash->warning("Oops! Your are unauthorized to access this page");
+        $this->flash->warning("Oops! Your are unauthorized to access this page");
     }
 
     public function show500Action()
     {
-	    $this->flash->error("Oops! Something went wrong.");
+        $this->flash->error("Oops! Something went wrong.");
     }
 }

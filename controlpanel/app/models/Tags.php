@@ -4,6 +4,7 @@ use Phalcon\Mvc\Model;
 use Phalcon\Mvc\Model\Relation;
 use Phalcon\Mvc\Model\Message as Message;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
+
 /**
  * Tags
  */
@@ -30,8 +31,7 @@ class Tags extends Model
     {
         if (!is_numeric($id)) {
             $this->appendMessage(new Message('ID is invalid.', 'id', 'InvalidValue'));
-        }
-        else {
+        } else {
             $this->id = $id;
         }
     }
@@ -41,12 +41,11 @@ class Tags extends Model
         return $this->id;
     }
 
-	public function setTag($tag)
+    public function setTag($tag)
     {
-        if(empty($tag)) {
+        if (empty($tag)) {
             $this->appendMessage(new Message('Tag is required.', 'tag', 'InvalidValue'));
-        }
-        else {
+        } else {
             $this->tag = strtolower($tag);
         }
     }
@@ -56,17 +55,17 @@ class Tags extends Model
         return $this->tag;
     }
 
-	public function isValid()
+    public function isValid()
     {
         return (count($this->getMessages()) > 0 ? false : true);
     }
 
-	public function beforeSave()
+    public function beforeSave()
     {
         $this->validate(new Uniqueness(array(
-                        "field"   => array('tag'),
-                        "message" => "This Tag has been added before."
-                        )));
+            "field"   => array('tag'),
+            "message" => "This Tag has been added before."
+        )));
         return ($this->validationHasFailed() == true ? false : true);
     }
 }

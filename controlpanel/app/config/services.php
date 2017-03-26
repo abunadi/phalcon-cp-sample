@@ -26,17 +26,17 @@ $di->setInternalEventsManager(new EventsManager);
  * We register the events manager
  */
 $di->set('dispatcher', function () use ($di) {
-	/**
-	 * Check if the user is allowed to access certain action using the SecurityPlugin
-	 */
-	$di->getInternalEventsManager()->attach('dispatch:beforeDispatch', new SecurityPlugin);
-	/**
-	 * Handle exceptions and not-found exceptions using NotFoundPlugin
-	 */
-	$di->getInternalEventsManager()->attach('dispatch:beforeException', new NotFoundPlugin);
-	$dispatcher = new Dispatcher;
-	$dispatcher->setEventsManager($di->getInternalEventsManager());
-	return $dispatcher;
+    /**
+     * Check if the user is allowed to access certain action using the SecurityPlugin
+     */
+    $di->getInternalEventsManager()->attach('dispatch:beforeDispatch', new SecurityPlugin);
+    /**
+     * Handle exceptions and not-found exceptions using NotFoundPlugin
+     */
+    $di->getInternalEventsManager()->attach('dispatch:beforeException', new NotFoundPlugin);
+    $dispatcher = new Dispatcher;
+    $dispatcher->setEventsManager($di->getInternalEventsManager());
+    return $dispatcher;
 });
 
 
@@ -44,7 +44,7 @@ $di->set('dispatcher', function () use ($di) {
  * The URL component is used to generate all kind of urls in the application
  */
 $di->setShared('url', function () use ($config) {
-	$url = new UrlResolver();
+    $url = new UrlResolver();
     $url->setBaseUri($config->application->baseUri);
     return $url;
 });
@@ -53,15 +53,15 @@ $di->setShared('url', function () use ($config) {
  * Setting up the view component
  */
 $di->setShared('view', function () use ($config) {
-   	$view = new View();
-   	$view->setViewsDir($config->application->viewsDir);
+    $view = new View();
+    $view->setViewsDir($config->application->viewsDir);
 
     $view->registerEngines(array(
-        '.volt' => function ($view, $di) use ($config) {
+        '.volt'  => function ($view, $di) use ($config) {
             $volt = new VoltEngine($view, $di);
 
             $volt->setOptions(array(
-                'compiledPath' => $config->application->cacheDir,
+                'compiledPath'      => $config->application->cacheDir,
                 'compiledSeparator' => '_'
             ));
             return $volt;
@@ -76,14 +76,14 @@ $di->setShared('view', function () use ($config) {
  * Database connection is created based in the parameters defined in the configuration file
  */
 $di->setShared('db', function () use ($config, $di) {
-	$di->getInternalEventsManager()->attach('db', new DBListener());
+    $di->getInternalEventsManager()->attach('db', new DBListener());
     $dbConfig = $config->database->toArray();
     $adapter = $dbConfig['adapter'];
     unset($dbConfig['adapter']);
 
     $class = 'Phalcon\Db\Adapter\Pdo\\' . $adapter;
-	$conn  = new $class($dbConfig);
-	$conn->setEventsManager($di->getInternalEventsManager());
+    $conn = new $class($dbConfig);
+    $conn->setEventsManager($di->getInternalEventsManager());
     return $conn;
 });
 
@@ -91,7 +91,7 @@ $di->setShared('db', function () use ($config, $di) {
  * If the configuration specify the use of metadata adapter use it or use memory otherwise
  */
 $di->setShared('modelsMetadata', function () {
-    $metaData = new SessionMetaData(array("prefix"   => "cp_cache"));
+    $metaData = new SessionMetaData(array("prefix" => "cp_cache"));
     return $metaData;
 });
 
@@ -124,5 +124,5 @@ $di->set('config', function () use ($config) {
 
 // Register the logging servise
 $di->setShared('logger', function () {
-	return new Logs(array('db' => APP_PATH . '/app/logs/db.log', 'cp' => APP_PATH . '/app/logs/controlpanel.log'));
+    return new Logs(array('db' => APP_PATH . '/app/logs/db.log', 'cp' => APP_PATH . '/app/logs/controlpanel.log'));
 });

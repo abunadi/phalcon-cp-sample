@@ -20,7 +20,7 @@ class SessionController extends ControllerBase
     private function _registerSession(CPUsers $user)
     {
         $this->session->set('auth', array(
-            'id' => $user->id,
+            'id'       => $user->id,
             'username' => $user->username
         ));
     }
@@ -31,29 +31,29 @@ class SessionController extends ControllerBase
      */
     public function startAction()
     {
-	    if ($this->request->isPost()) {
-        	$username = $this->request->getPost('username');
+        if ($this->request->isPost()) {
+            $username = $this->request->getPost('username');
             $password = $this->request->getPost('password');
-		
-		    if(empty($username) || empty($password)){
-			    $this->flash->error('Type your username & password');
-			    return $this->forward('index');
-		    }
+
+            if (empty($username) || empty($password)) {
+                $this->flash->error('Type your username & password');
+                return $this->forward('index');
+            }
 
             $user = CPUsers::findFirst(array(
-          		    	"username = :username: AND password = :password:",
-	  	          	    'bind' => array('username' => $username, 'password' => md5($password))
-                    ));
+                "username = :username: AND password = :password:",
+                'bind' => array('username' => $username, 'password' => md5($password))
+            ));
 
-           	if ($user != false) {
-			    $user->last_activity = date("Y-m-d H:i:s");
-			    if ($user->save() == false) {
-				    $this->flash->error($user->getMessages());
-				    return $this->forward('index');
-			    }
-			    $this->_registerSession($user);
-                	$this->flash->success('Welcome ' .ucfirst($user->username));
-                	return $this->forward('index');
+            if ($user != false) {
+                $user->last_activity = date("Y-m-d H:i:s");
+                if ($user->save() == false) {
+                    $this->flash->error($user->getMessages());
+                    return $this->forward('index');
+                }
+                $this->_registerSession($user);
+                $this->flash->success('Welcome ' . ucfirst($user->username));
+                return $this->forward('index');
             }
             $this->flash->error('Wrong email/password');
         }

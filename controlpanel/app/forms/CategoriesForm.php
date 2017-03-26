@@ -5,11 +5,11 @@ use Phalcon\Forms\Form;
 class CategoriesForm extends Form
 {
     /**
-    * Initialize the categories form
-    */
+     * Initialize the categories form
+     */
     public function initialize($entity = null, $send_to)
     {
-        if(!is_null($entity)) {
+        if (!is_null($entity)) {
             $this->view->data = $entity->getData();
         }
         $this->view->form_action = $send_to;

@@ -3,6 +3,7 @@ use Phalcon\Mvc\Model;
 use Phalcon\Mvc\Model\Relation;
 use Phalcon\Mvc\Model\Message as Message;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
+
 /**
  * ItemsTags
  */
@@ -10,28 +11,27 @@ class ItemsTags extends Model
 {
     protected $id;
     protected $sid;
-	protected $tid;
+    protected $tid;
 
-	public function getSource()
+    public function getSource()
     {
         return "items_tags";
     }
 
     /**
-    * Items Tags initializer
-    */
+     * Items Tags initializer
+     */
     public function initialize($id = null)
     {
         $this->belongsTo('sid', 'Items', 'id');
         $this->belongsTo('tid', 'Tags', 'id');
     }
 
-	public function setID($id)
+    public function setID($id)
     {
-        if(!is_numeric($id)) {
+        if (!is_numeric($id)) {
             $this->appendMessage(new Message('ID is invalid.', 'id', 'InvalidValue'));
-        }
-        else {
+        } else {
             $this->id = $id;
         }
     }
@@ -41,12 +41,11 @@ class ItemsTags extends Model
         return $this->id;
     }
 
-	public function setSID($sid)
+    public function setSID($sid)
     {
-        if(!is_numeric($sid)) {
+        if (!is_numeric($sid)) {
             $this->appendMessage(new Message('SID is invalid.', 'sid', 'InvalidValue'));
-        }
-        else {
+        } else {
             $this->sid = $sid;
         }
     }
@@ -56,12 +55,11 @@ class ItemsTags extends Model
         return $this->sid;
     }
 
-	public function setTID($tid)
+    public function setTID($tid)
     {
-        if(!is_numeric($tid)) {
+        if (!is_numeric($tid)) {
             $this->appendMessage(new Message('TID is invalid.', 'tid', 'InvalidValue'));
-        }
-        else {
+        } else {
             $this->tid = $tid;
         }
     }
@@ -70,8 +68,8 @@ class ItemsTags extends Model
     {
         return $this->tid;
     }
-	
-	public function isValid()
+
+    public function isValid()
     {
         return (count($this->getMessages()) > 0 ? false : true);
     }
@@ -79,9 +77,9 @@ class ItemsTags extends Model
     public function beforeSave()
     {
         $this->validate(new Uniqueness(array(
-                            "field"   => array('sid', 'tid'),
-                            "message" => "This Tag has been added before to this item."
-                            )));
+            "field"   => array('sid', 'tid'),
+            "message" => "This Tag has been added before to this item."
+        )));
         return ($this->validationHasFailed() == true ? false : true);
     }
 }
