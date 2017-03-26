@@ -16,7 +16,7 @@ class IndexController extends ControllerBase
     public function indexAction()
     {
         if ($this->view->auth) {
-            //$malls 				= Malls::find();
+            //$categories 	    = Malls::find();
             //$items 			= Items::find();
             $this->view->malls_count = 10;
             $this->view->stores_count = 20;
