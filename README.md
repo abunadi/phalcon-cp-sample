@@ -3,13 +3,13 @@
 This is a sample of Admin Panel which gives you the basic of what you need to start your Control Panel development based on PhaclonPHP framework. 
 
 It comes with basic features : 
-1- Authentication 
-2- Dashboard Page
-3- Categories/Items model
-4- Logging
-5- Items Tagging
-6- Upload images
-7- Role Permissions
+1. Authentication 
+2. Dashboard Page
+3. Categories/Items model
+4. Logging
+5. Items Tagging
+6. Upload images
+7. Role Permissions
 
 This sample comes with Categories/Items model. It allows you to add new parent/child categories with descriptions. And you can add new items under categories (child) with name, description, image and tags fields. Both Categories and Items comes with CRUD functions. 
 
