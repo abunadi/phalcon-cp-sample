@@ -1,4 +1,4 @@
-# phalcon-cp-sample
+# Phalcon Admin-Panel Sample
 
 This is a sample of Admin Panel which gives you the basic of what you need to start your Control Panel development based on PhaclonPHP framework. 
 
